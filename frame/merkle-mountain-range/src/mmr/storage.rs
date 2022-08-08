@@ -27,7 +27,6 @@ use sp_std::iter::Peekable;
 #[cfg(not(feature = "std"))]
 use sp_std::prelude::*;
 
-use parity_scale_codec::alloc::string::ToString;
 
 use crate::{
 	mmr::{utils::NodesUtils, Node, NodeOf},
@@ -294,7 +293,7 @@ where
 		let size = NodesUtils::new(leaves).size();
 
 		if pos != size {
-			return Err(mmr_lib::Error::InconsistentlyStored("pos != size".to_string()))
+			return Err(mmr_lib::Error::InconsistentlyStored(pos))
 		}
 
 		let new_size = size + elems.len() as NodeIndex;
