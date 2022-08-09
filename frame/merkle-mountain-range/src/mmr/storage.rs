@@ -99,7 +99,7 @@ where
 		let size = NodesUtils::new(leaves).size();
 
 		if pos != size {
-			return Err(mmr_lib::Error::InconsistentStore)
+			return Err(mmr_lib::Error::InconsistentlyStored(size))
 		}
 
 		let new_size = size + elems.len() as NodeIndex;
