@@ -939,7 +939,7 @@ dependencies = [
 [[package]]
 name = "ckb-merkle-mountain-range"
 version = "0.3.2"
-source = "git+https://github.com/Lederstrumpf/merkle-mountain-range?branch=debug-inconsistent-store#0fdddef5a57a5910dc92f13fcaaf3858acdf2202"
+source = "git+https://github.com/Lederstrumpf/merkle-mountain-range?branch=debug-inconsistent-store#cd61a4746bcf0bf0c631d6f40ae08c22e5ae5493"
 dependencies = [
  "cfg-if 0.1.10",
 ]
