@@ -13,7 +13,7 @@ readme = "README.md"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.0.0" }
+codec = { package = "parity-scale-codec", version = "3.0.0", features = ["chain-error"] }
 jsonrpsee = { version = "0.15.1", features = ["server", "macros"] }
 pallet-transaction-payment-rpc-runtime-api = { version = "4.0.0-dev", path = "./runtime-api" }
 sp-api = { version = "4.0.0-dev", path = "../../../primitives/api" }
