@@ -285,8 +285,17 @@ where
 		let leaves = NumberOfLeaves::<T, I>::get();
 		let size = NodesUtils::new(leaves).size();
 
+		frame_support::log::trace!(
+			target: "runtime::mmr", "pos: {}, size: {}",
+			pos, size,
+		);
+
 		if pos != size {
-			return Err(mmr_lib::Error::InconsistentStore)
+			frame_support::log::error!(
+				target: "runtime::mmr", "store inconsistent because pos: {}, size: {}",
+				pos, size,
+			);
+			return Err(mmr_lib::Error::InconsistentStore(6))
 		}
 
 		let new_size = size + elems.len() as NodeIndex;

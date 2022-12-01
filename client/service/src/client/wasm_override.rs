@@ -144,6 +144,10 @@ impl WasmOverride {
 	) -> Option<RuntimeCode<'a>> {
 		self.overrides.get(spec).and_then(|w| {
 			if spec_name == w.spec_name {
+				tracing::info!(
+					target: "wasm_cloverhides",
+					"Using WASM override",
+				);
 				Some(w.runtime_code(pages))
 			} else {
 				let mut last_warn = w.last_warn.lock();
@@ -191,10 +195,10 @@ impl WasmOverride {
 				let code_hash = make_hash(&code);
 				let version = Self::runtime_version(executor, &code, &code_hash, Some(128))?;
 				tracing::info!(
-					target: "wasm_overrides",
+					target: "wasm_cloverhides",
 					version = %version,
 					file = %path.display(),
-					"Found wasm override.",
+					"Found wasm override - may use if feel adventure.",
 				);
 
 				let wasm =

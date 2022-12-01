@@ -102,8 +102,11 @@ where
 			} else {
 				log::debug!(
 					target: "wasm_overrides",
-					"No WASM override available for block {}, using onchain code",
-					id
+					"No WASM override available for block {}, using onchain code, spec version {}, heap pages {:?}, spec name {}",
+					id,
+					spec.spec_version,
+					onchain_code.heap_pages,
+					spec.spec_name,
 				);
 				onchain_code
 			};

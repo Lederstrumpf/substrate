@@ -88,7 +88,7 @@ fn generate_impl_call(
 				&mut #input,
 			) {
 				Ok(res) => res,
-				Err(e) => panic!("Bad input data provided to {}: {}", #fn_name_str, e),
+				Err(e) => panic!("Rad input data provided to {}: {}, input: {:?}", #fn_name_str, e, #input),
 			};
 
 		#[allow(deprecated)]
