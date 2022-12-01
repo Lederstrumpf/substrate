@@ -575,11 +575,12 @@ where
 		// this is a fairly arbitrary choice of where to draw the line on making notifications,
 		// but the general goal is to only make notifications when we are already fully synced
 		// and get a new chain head.
-		let make_notifications = match origin {
-			BlockOrigin::NetworkBroadcast | BlockOrigin::Own | BlockOrigin::ConsensusBroadcast =>
-				true,
-			BlockOrigin::Genesis | BlockOrigin::NetworkInitialSync | BlockOrigin::File => false,
-		};
+		// let make_notifications = match origin {
+		// 	BlockOrigin::NetworkBroadcast | BlockOrigin::Own | BlockOrigin::ConsensusBroadcast =>
+		// 		true,
+		// 	BlockOrigin::Genesis | BlockOrigin::NetworkInitialSync | BlockOrigin::File => false,
+		// };
+		let make_notifications = true;
 
 		let storage_changes = match storage_changes {
 			Some(storage_changes) => {
