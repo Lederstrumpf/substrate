@@ -577,9 +577,9 @@ where
 		// but the general goal is to only make notifications when we are already fully synced
 		// and get a new chain head.
 		let make_notifications = match origin {
-			BlockOrigin::NetworkBroadcast | BlockOrigin::Own | BlockOrigin::ConsensusBroadcast =>
+			BlockOrigin::NetworkBroadcast | BlockOrigin::Own | BlockOrigin::ConsensusBroadcast | BlockOrigin::NetworkInitialSync =>
 				true,
-			BlockOrigin::Genesis | BlockOrigin::NetworkInitialSync | BlockOrigin::File => false,
+			BlockOrigin::Genesis | BlockOrigin::File => false,
 		};
 
 		let storage_changes = match storage_changes {
