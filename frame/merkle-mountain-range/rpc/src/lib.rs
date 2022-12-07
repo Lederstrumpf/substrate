@@ -108,7 +108,7 @@ pub trait MmrApi<BlockHash, BlockNumber> {
 	#[method(name = "mmr_generateProof")]
 	fn generate_proof(
 		&self,
-		block_number: BlockNumber,
+		leaf_index: sp_mmr_primitives::LeafIndex,
 		at: Option<BlockHash>,
 	) -> RpcResult<LeafProof<BlockHash>>;
 
@@ -179,7 +179,7 @@ where
 {
 	fn generate_proof(
 		&self,
-		block_number: NumberFor<Block>,
+		leaf_index: sp_mmr_primitives::LeafIndex,
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<LeafProof<Block::Hash>> {
 		let api = self.client.runtime_api();
@@ -189,7 +189,7 @@ where
 			.generate_proof_with_context(
 				&BlockId::hash(block_hash),
 				sp_core::ExecutionContext::OffchainCall(None),
-				block_number,
+				leaf_index,
 			)
 			.map_err(runtime_error_into_rpc_error)?
 			.map_err(mmr_error_into_rpc_error)?;

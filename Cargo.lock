@@ -5670,6 +5670,7 @@ dependencies = [
 name = "pallet-mmr-rpc"
 version = "3.0.0"
 dependencies = [
+ "frame-support",
  "jsonrpsee",
  "parity-scale-codec",
  "serde",
