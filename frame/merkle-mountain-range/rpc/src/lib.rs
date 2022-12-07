@@ -29,6 +29,7 @@ use jsonrpsee::{
 	types::error::{CallError, ErrorObject},
 };
 use serde::{Deserialize, Serialize};
+use frame_support::log::{info};
 
 use sp_api::{NumberFor, ProvideRuntimeApi};
 use sp_blockchain::HeaderBackend;
@@ -184,6 +185,12 @@ where
 	) -> RpcResult<LeafProof<Block::Hash>> {
 		let api = self.client.runtime_api();
 		let block_hash = at.unwrap_or_else(|| self.client.info().best_hash);
+		info!("Received generate_proof request for block {:?} at {:?}", leaf_index, block_hash);
+
+		// let block_number = self.client.info().block_gap.unwrap().0;
+		// let block_number = self.client.header(block_hash)?.ok_or_else(|| {
+		// 	Error::from(ErrorKind::InvalidBlockNumber(format!("Unknown block {:?}", block_hash)))
+		// })?.number().clone();
 
 		let (leaf, proof) = api
 			.generate_proof_with_context(
@@ -266,7 +273,7 @@ fn mmr_error_into_rpc_error(err: MmrError) -> CallError {
 fn runtime_error_into_rpc_error(err: impl std::fmt::Debug) -> CallError {
 	CallError::Custom(ErrorObject::owned(
 		RUNTIME_ERROR,
-		"Runtime trapped",
+		"Runtime flapped",
 		Some(format!("{:?}", err)),
 	))
 }
