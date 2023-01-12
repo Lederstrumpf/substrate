@@ -187,10 +187,22 @@ where
 		// fork-resistant. The MMR client gadget task will "canonicalize" it on the first
 		// finality notification that follows, when we are not worried about forks anymore.
 		let temp_key = Pallet::<T, I>::node_temp_offchain_key(pos, parent_hash);
-		debug!(
-			target: "runtime::mmr::offchain", "offchain db set: pos {} parent_hash {:?} key {:?}",
-			pos, parent_hash, temp_key
-		);
+		match node {
+			Node::Data(data) => {
+				// Store full leaf off-chain.
+				let key = Pallet::<T, I>::node_temp_offchain_key(pos, parent_hash);
+				debug!(
+					target: "runtime::mmr::offchain", "offchain db set: pos {} parent_hash {:?} key {:?}, data {:?}, encoded {:?}",
+					pos, parent_hash, temp_key, data, encoded_node
+				);
+			},
+			Node::Hash(_) => {
+				debug!(
+					target: "runtime::mmr::offchain", "offchain db set: pos {} parent_hash {:?} key {:?}, node {:?}, encoded {:?}",
+					pos, parent_hash, temp_key, node, encoded_node
+				);
+			},
+		}
 		// Indexing API is used to store the full node content.
 		offchain_index::set(&temp_key, &encoded_node);
 	}
